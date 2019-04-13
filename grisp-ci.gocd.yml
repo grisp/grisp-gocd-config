@@ -6,11 +6,11 @@ common:
       arguments:
         - -c
         - |
-          echo 'SHORT_SHA1=$(echo $GO_REVISION | cut -c 1-10)
+          rm -rf /opt/*
+          echo 'SHORT_SHA1=$(echo "$GO_REVISION" | cut -c 1-10)
           export TOOLCHAIN_BASE_PATH="/opt/grisp/grisp-software/grisp-base"
           export TOOLCHAIN_PATH="$TOOLCHAIN_BASE_PATH/$SHORT_SHA1"
           export GO_PWD=$PWD
-          rm -rf /opt/grisp
           mkdir -p $TOOLCHAIN_BASE_PATH
           ln -s $GO_PWD $TOOLCHAIN_PATH' > grisp.rc
   cleanup-toolchain-build-dir: &cleanup-toolchain-build-dir
