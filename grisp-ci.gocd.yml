@@ -10,10 +10,10 @@ pipelines:
             build.sh:
               artifacts:
                 - rsb-reports:
-                    source: artifacts/rsb-reports
+                    source: rtems-source-builder/rtems/rsb-report*
                     destination: rsb-reports
                 - rtems-install:
-                    source: artifacts/rtems-install
+                    source: rtems-install
                     destination: rtems-install
               tasks:
                 exec:
@@ -21,15 +21,13 @@ pipelines:
                     /bin/bash -c '
                     GO_PWD=$PWD
                     SHORT_SHA1=$(echo "${GO_REVISION}" | cut -c 1-10)
-                    TOOLCHAIN_PATH="/opt/grisp/grisp-software/grisp-base/$SHORT_SHA1"
+                    TOOLCHAIN_BASE_PATH="/opt/grisp/grisp-software/grisp-base"
+                    TOOLCHAIN_PATH="$TOOLCHAIN_BASE_PATH/$SHORT_SHA1"
                     rm -rf /opt/grisp
-                    mkdir -p ${TOOLCHAIN_PATH}
-                    shopt -s dotglob && cp ./* "${TOOLCHAIN_PATH}"
+                    mkdir -p ${TOOLCHAIN_BASE_PATH}
+                    ln -s $GO_PWD $TOOLCHAIN_PATH
                     cd $TOOLCHAIN_PATH; ./build/build.sh
-                    mkdir -p $GO_PWD/artifacts/rsb-reports
-                    mkdir -p $GO_PWD/artifacts/rtems-install
-                    cp $TOOLCHAIN_PATH/rtems-source-builder/rtems/rsb-report* $GO_PWD/artifacts/rsb-reports
-                    mv /opt/grisp/*/*/*/rtems-install $GO_PWD/artifacts/rtems-install
+                    unlink $TOOLCHAIN_PATH
                     rm -rf /opt/grisp'
 
 
