@@ -6,7 +6,7 @@ common:
       arguments:
         - -c
         - |
-          echo 'SHORT_SHA1=$(echo "${GO_REVISION}" | cut -c 1-10)
+          echo 'SHORT_SHA1=$(echo $GO_REVISION | cut -c 1-10)
           export TOOLCHAIN_BASE_PATH="/opt/grisp/grisp-software/grisp-base"
           export TOOLCHAIN_PATH="$TOOLCHAIN_BASE_PATH/$SHORT_SHA1"
           export GO_PWD=$PWD
@@ -45,7 +45,7 @@ pipelines:
                       - -c
                       - |
                         source grisp.rc
-                        cd $TOOLCHAIN_PATH; ./build/build.sh
+                        cd $TOOLCHAIN_PATH && ./build/build.sh
                 - *cleanup-toolchain-build-dir
       - deploy-to-aws:
           clean_workspace: true
