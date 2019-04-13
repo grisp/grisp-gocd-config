@@ -53,13 +53,12 @@ pipelines:
             deploy:
               tasks:
                 - fetch:
+                    artifact-origin: gocd
                     pipeline: grisp-software
                     stage: build
                     job: build.sh
-                    artifact-id: rtems-install
-                    configuration:
-                      options:
-                        DestOnAgent: rtems-install
+                    source: rtems-install
+                    destination: rtems-install                                            
                 - *symlink-toolchain
                 - exec:
                     command: /bin/bash
