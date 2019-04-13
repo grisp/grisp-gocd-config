@@ -21,6 +21,7 @@ common:
         - /opt/grisp
 pipelines:
   grisp-software:
+    group: grisp
     materials:
       github:
         git: https://github.com/grisp/grisp-software.git
