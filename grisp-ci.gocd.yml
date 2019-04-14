@@ -8,7 +8,7 @@ common:
         - |
           rm -rf /opt/*
           echo "GO REVISION is: $GO_REVISION"
-          echo 'SHORT_SHA1=$(echo "$GO_REVISION" | cut -c 1-10)
+          echo 'SHORT_SHA1=$(echo "$GO_REVISION_GITHUB" | cut -c 1-10)
           [[ -v GO_REVISION ]]; echo $?
           export TOOLCHAIN_BASE_PATH="/opt/grisp/grisp-software/grisp-base"
           export TOOLCHAIN_PATH="$TOOLCHAIN_BASE_PATH/$SHORT_SHA1"
