@@ -48,7 +48,11 @@ pipelines:
                       - |
                         source grisp.rc
                         echo $TOOLCHAIN_PATH
+                        pwd
+                        ls -al
+                        echo "GO REV GH: $GO_REVISION_GITHUB"
                         cd $TOOLCHAIN_PATH
+                        ls -al
                         ./build/build.sh
                 - *cleanup-toolchain-build-dir
       - deploy-to-aws:
