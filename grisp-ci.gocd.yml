@@ -32,7 +32,7 @@ pipelines:
             build.sh:
               artifacts:
                 - build:
-                    source: rtems-source-builder/rtems/rsb-report*
+                    source: rtems-source-builder/rtems/rsb-report**
                     destination: rsb-reports
                 - build:
                     source: rtems-install
@@ -47,10 +47,6 @@ pipelines:
                         source grisp.rc
                         cd $TOOLCHAIN_PATH
                         ./build/build.sh
-                        if [ $(ls -1q rtems-source-builder/rtems/rsb-report* | wc -l) -eq 0 ];
-                        then
-                        echo "Build ok" > rtems-source-builder/rtems/rsb-report-ok;
-                        fi
                 - *cleanup-toolchain-build-dir
       - deploy-to-aws:
           clean_workspace: true
