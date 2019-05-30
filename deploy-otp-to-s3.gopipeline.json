@@ -17,23 +17,23 @@
     "materials": [
         
         {
-            "pipeline": "grisp-otp-20.2",
+            "pipeline": "grisp-grisp-otp-20.2",
             "stage": "build",
-            "name": "grisp",
+            "name": "grisp-grisp-otp-20.2",
             "type": "dependency"
         },
         
         {
-            "pipeline": "grisp-otp-21.0-rc1",
+            "pipeline": "grisp-grisp-otp-21.0-rc1",
             "stage": "build",
-            "name": "grisp",
+            "name": "grisp-grisp-otp-21.0-rc1",
             "type": "dependency"
         },
         
         {
-            "pipeline": "grisp-otp-21.0",
+            "pipeline": "grisp-grisp-otp-21.0",
             "stage": "build",
-            "name": "grisp",
+            "name": "grisp-grisp-otp-21.0",
             "type": "dependency"
         },
         
@@ -85,7 +85,7 @@
                             "source": "otp",
                             "is_source_a_file": false,
                             "destination": "",
-                            "pipeline": "grisp-otp-20.2",
+                            "pipeline": "grisp-grisp-otp-20.2",
                             "stage": "build",
                             "job": "build_grisp_project",
                             "artifact_origin": "gocd",
@@ -97,7 +97,7 @@
                             "source": "otp",
                             "is_source_a_file": false,
                             "destination": "",
-                            "pipeline": "grisp-otp-21.0-rc1",
+                            "pipeline": "grisp-grisp-otp-21.0-rc1",
                             "stage": "build",
                             "job": "build_grisp_project",
                             "artifact_origin": "gocd",
@@ -109,7 +109,7 @@
                             "source": "otp",
                             "is_source_a_file": false,
                             "destination": "",
-                            "pipeline": "grisp-otp-21.0",
+                            "pipeline": "grisp-grisp-otp-21.0",
                             "stage": "build",
                             "job": "build_grisp_project",
                             "artifact_origin": "gocd",
