@@ -90,7 +90,7 @@
                             "timeout": -1.0,
                             "arguments": [
                                 ".gocd/grisp-project.sh",
-                                "--erlang-version 20.2", "--use-grisp-material", "--toolchain-from-s3"
+                                "--erlang-version=20.2", "--use-grisp-material", "--toolchain-from-s3"
                             ],
                             "run_if": "passed",
                             "type": "exec"
