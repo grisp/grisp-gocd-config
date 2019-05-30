@@ -99,6 +99,10 @@
                             "arguments": [
                                 ".gocd/grisp-project.sh",
                                 "--erlang-version 21.0-rc1"
+                                
+                                
+                                
+                                
                             ],
                             "run_if": "passed",
                             "type": "exec"

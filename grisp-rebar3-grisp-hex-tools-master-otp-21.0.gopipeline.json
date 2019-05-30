@@ -103,11 +103,11 @@
                             "timeout": -1.0,
                             "arguments": [
                                 ".gocd/grisp-project.sh",
-                                "--erlang-version 21.0",
-                                "--use-rebar3-grisp-material"
-                                ,
-                                "--use-grisp-tools-material"
+                                "--erlang-version 21.0"
                                 
+                                , "--use-rebar3-grisp-material"
+                                , "--use-grisp-tools-material"
+                                , "--toolchain-from-s3"
                             ],
                             "run_if": "passed",
                             "type": "exec"
