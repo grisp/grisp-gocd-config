@@ -7,6 +7,18 @@
     "parameters": [],
     "materials": [
         
+        {
+            "scm_id": "7797947b-a4eb-458f-b655-e3a3017c6a07",
+            "destination": "grisp",
+            "filter": {
+                "ignore": [],
+                "whitelist": []
+            },
+            "configuration": [],
+            "name": "grisp",
+            "type": "plugin"
+        },
+        
         
         {
             "scm_id": "a0a55708-e100-4e52-8ebf-a21193f47bf1",
@@ -102,7 +114,7 @@
                             "timeout": -1.0,
                             "arguments": [
                                 ".gocd/grisp-project.sh",
-                                "--erlang-version 21.0", "--use-rebar3-grisp-material", "--use-grisp-tools-material", "--toolchain-from-s3"
+                                "--erlang-version 21.0", "--use-grisp-material", "--use-rebar3-grisp-material", "--use-grisp-tools-material", "--toolchain-from-s3"
                             ],
                             "run_if": "passed",
                             "type": "exec"
