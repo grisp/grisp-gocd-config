@@ -76,7 +76,6 @@
                     "timeout": 0.0,
                     "tasks": [
                         
-
                         {
                             "command": "/bin/bash",
                             "timeout": -1.0,
@@ -91,11 +90,7 @@
                             "timeout": -1.0,
                             "arguments": [
                                 ".gocd/grisp-project.sh",
-                                "--erlang-version 21.0"
-                                
-                                , "--use-rebar3-grisp-material"
-                                
-                                , "--toolchain-from-s3"
+                                "--erlang-version 21.0", "--use-rebar3-grisp-material", "--toolchain-from-s3"
                             ],
                             "run_if": "passed",
                             "type": "exec"
