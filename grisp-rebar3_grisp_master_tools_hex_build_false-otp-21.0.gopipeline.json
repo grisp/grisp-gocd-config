@@ -98,7 +98,7 @@
                             "timeout": -1.0,
                             "arguments": [
                                 ".gocd/grisp-project.sh",
-                                "--erlang-version=21.0", "--use-grisp-material", "--use-rebar3-grisp-material", "--toolchain-from-s3"
+                                "--erlang-version=21.0", "--use-grisp-material", "--use-rebar3-grisp-material", "--toolchain-from-s3", "--prebuilt-otp"
                             ],
                             "run_if": "passed",
                             "type": "exec"
