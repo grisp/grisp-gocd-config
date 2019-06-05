@@ -18,7 +18,7 @@
         },
         
         {
-            "url": "https://github.com/nextl00p/grisp-gocd.git",
+            "url": "https://github.com/grisp/grisp-gocd.git",
             "branch": "master",
             "shallow_clone": false,
             "filter": {
@@ -55,11 +55,13 @@
                     "tabs": [],
                     "resources": [],
                     "artifacts": [
+                        
                         {
                             "source": "grisp_otp*.tar.gz",
                             "destination": "otp",
                             "type": "build"
                         },
+                        
                         {
                             "source": "grisp_release*.tar.gz",
                             "destination": "grisp_release/",

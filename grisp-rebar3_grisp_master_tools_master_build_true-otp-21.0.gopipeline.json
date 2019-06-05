@@ -1,21 +1,50 @@
 {
     "group": "grisp",
-    "name": "grisp-new-toolchain-otp-21.0",
+    "name": "grisp-rebar3_grisp_master_tools_master_build_true-otp-21.0",
     "label_template": "${COUNT}",
     "lock_behavior": "none",
     "environment_variables": [],
     "parameters": [],
     "materials": [
         
-        
+        {
+            "scm_id": "7797947b-a4eb-458f-b655-e3a3017c6a07",
+            "destination": "grisp",
+            "filter": {
+                "ignore": [],
+                "whitelist": []
+            },
+            "configuration": [],
+            "name": "grisp",
+            "type": "plugin"
+        },
         
         
         {
-            "pipeline": "grisp-software",
-            "stage": "build",
-            "name": "grisp-software",
-            "type": "dependency"
+            "scm_id": "a0a55708-e100-4e52-8ebf-a21193f47bf1",
+            "destination": "rebar3_grisp",
+            "filter": {
+                "ignore": [],
+                "whitelist": []
+            },
+            "configuration": [],
+            "name": "rebar3_grisp",
+            "type": "plugin"
         },
+        
+        
+        {
+            "scm_id": "b0a55708-e100-4e52-8ebf-a21193f47bf1",
+            "destination": "grisp_tools",
+            "filter": {
+                "ignore": [],
+                "whitelist": []
+            },
+            "configuration": [],
+            "name": "grisp_tools",
+            "type": "plugin"
+        },
+        
         
         {
             "url": "https://github.com/grisp/grisp-gocd.git",
@@ -74,18 +103,6 @@
                     "tasks": [
                         
                         {
-                            "source": "toolchain",
-                            "is_source_a_file": false,
-                            "destination": "",
-                            "pipeline": "grisp-software",
-                            "stage": "build",
-                            "job": "build.sh",
-                            "artifact_origin": "gocd",
-                            "run_if": "passed",
-                            "type": "fetch"
-                        },
-                        
-                        {
                             "command": "/bin/bash",
                             "timeout": -1.0,
                             "arguments": [
@@ -99,7 +116,7 @@
                             "timeout": -1.0,
                             "arguments": [
                                 ".gocd/grisp-project.sh",
-                                "--erlang-version=21.0"
+                                "--erlang-version=21.0", "--use-grisp-material", "--use-rebar3-grisp-material", "--use-grisp-tools-material", "--toolchain-from-s3"
                             ],
                             "run_if": "passed",
                             "type": "exec"

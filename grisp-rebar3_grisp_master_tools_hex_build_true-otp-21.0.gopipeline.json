@@ -1,6 +1,6 @@
 {
     "group": "grisp",
-    "name": "grisp-rebar3-grisp-master-tools-hex-otp-21.0",
+    "name": "grisp-rebar3_grisp_master_tools_hex_build_true-otp-21.0",
     "label_template": "${COUNT}",
     "lock_behavior": "none",
     "environment_variables": [],
@@ -35,7 +35,7 @@
         
         
         {
-            "url": "https://github.com/nextl00p/grisp-gocd.git",
+            "url": "https://github.com/grisp/grisp-gocd.git",
             "branch": "master",
             "shallow_clone": false,
             "filter": {
@@ -72,11 +72,13 @@
                     "tabs": [],
                     "resources": [],
                     "artifacts": [
+                        
                         {
                             "source": "grisp_otp*.tar.gz",
                             "destination": "otp",
                             "type": "build"
                         },
+                        
                         {
                             "source": "grisp_release*.tar.gz",
                             "destination": "grisp_release/",
