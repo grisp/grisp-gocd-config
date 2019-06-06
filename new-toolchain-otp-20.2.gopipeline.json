@@ -1,6 +1,6 @@
 {
     "group": "grisp",
-    "name": "grisp-new-toolchain-otp-21.0",
+    "name": "new-toolchain-otp-20.2",
     "label_template": "${COUNT}",
     "lock_behavior": "none",
     "environment_variables": [],
@@ -99,7 +99,7 @@
                             "timeout": -1.0,
                             "arguments": [
                                 ".gocd/grisp-project.sh",
-                                "--erlang-version=21.0"
+                                "--erlang-version=20.2"
                             ],
                             "run_if": "passed",
                             "type": "exec"

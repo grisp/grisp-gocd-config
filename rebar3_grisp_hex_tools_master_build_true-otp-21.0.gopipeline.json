@@ -1,6 +1,6 @@
 {
     "group": "grisp",
-    "name": "grisp-rebar3_grisp_hex_tools_master_build_true-otp-21.0",
+    "name": "rebar3_grisp_hex_tools_master_build_true-otp-21.0",
     "label_template": "${COUNT}",
     "lock_behavior": "none",
     "environment_variables": [],

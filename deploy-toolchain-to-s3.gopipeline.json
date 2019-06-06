@@ -23,23 +23,23 @@
         },
         
         {
-            "pipeline": "grisp-new-toolchain-otp-20.2",
+            "pipeline": "new-toolchain-otp-20.2",
             "stage": "build",
-            "name": "grisp-new-toolchain-otp-20.2",
+            "name": "new-toolchain-otp-20.2",
             "type": "dependency"
         },
         
         {
-            "pipeline": "grisp-new-toolchain-otp-21.0-rc1",
+            "pipeline": "new-toolchain-otp-21.0-rc1",
             "stage": "build",
-            "name": "grisp-new-toolchain-otp-21.0-rc1",
+            "name": "new-toolchain-otp-21.0-rc1",
             "type": "dependency"
         },
         
         {
-            "pipeline": "grisp-new-toolchain-otp-21.0",
+            "pipeline": "new-toolchain-otp-21.0",
             "stage": "build",
-            "name": "grisp-new-toolchain-otp-21.0",
+            "name": "new-toolchain-otp-21.0",
             "type": "dependency"
         },
         

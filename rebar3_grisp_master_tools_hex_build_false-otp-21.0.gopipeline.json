@@ -1,11 +1,23 @@
 {
     "group": "grisp",
-    "name": "grisp-rebar3_grisp_hex_tools_hex_build_true-otp-21.0",
+    "name": "rebar3_grisp_master_tools_hex_build_false-otp-21.0",
     "label_template": "${COUNT}",
     "lock_behavior": "none",
     "environment_variables": [],
     "parameters": [],
     "materials": [
+        
+        {
+            "scm_id": "7797947b-a4eb-458f-b655-e3a3017c6a07",
+            "destination": "grisp",
+            "filter": {
+                "ignore": [],
+                "whitelist": []
+            },
+            "configuration": [],
+            "name": "grisp",
+            "type": "plugin"
+        },
         
         
         {
@@ -62,12 +74,6 @@
                     "artifacts": [
                         
                         {
-                            "source": "grisp_otp*.tar.gz",
-                            "destination": "otp",
-                            "type": "build"
-                        },
-                        
-                        {
                             "source": "grisp_release*.tar.gz",
                             "destination": "grisp_release/",
                             "type": "build"
@@ -92,7 +98,7 @@
                             "timeout": -1.0,
                             "arguments": [
                                 ".gocd/grisp-project.sh",
-                                "--erlang-version=21.0", "--use-rebar3-grisp-material", "--toolchain-from-s3"
+                                "--erlang-version=21.0", "--use-grisp-material", "--use-rebar3-grisp-material", "--toolchain-from-s3", "--prebuilt-otp"
                             ],
                             "run_if": "passed",
                             "type": "exec"
