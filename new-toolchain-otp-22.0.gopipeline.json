@@ -30,7 +30,7 @@
       "url": "https://github.com/grisp/grisp-gocd.git"
     }
   ],
-  "name": "new-toolchain-otp-21.0-rc1",
+  "name": "new-toolchain-otp-22.0",
   "parameters": [
     
   ],
@@ -105,7 +105,7 @@
             {
               "arguments": [
                 ".gocd/grisp-project.sh",
-                "--erlang-version=21.0-rc1"
+                "--erlang-version=22.0"
               ],
               "command": "/bin/bash",
               "run_if": "passed",

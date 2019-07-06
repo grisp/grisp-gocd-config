@@ -7,10 +7,21 @@
   "lock_behavior": "none",
   "materials": [
     {
-      "name": "grisp-software",
-      "pipeline": "grisp-software",
-      "stage": "build",
-      "type": "dependency"
+      "auto_update": true,
+      "branch": "master",
+      "destination": "grisp/",
+      "filter": {
+        "ignore": [
+          
+        ],
+        "whitelist": [
+          
+        ]
+      },
+      "name": "grisp",
+      "shallow_clone": false,
+      "type": "git",
+      "url": "https:github.com/grisp/grisp.git"
     },
     {
       "auto_update": true,
@@ -30,7 +41,7 @@
       "url": "https://github.com/grisp/grisp-gocd.git"
     }
   ],
-  "name": "new-toolchain-otp-21.0-rc1",
+  "name": "grisp-master-otp-20.2",
   "parameters": [
     
   ],
@@ -83,17 +94,6 @@
           ],
           "tasks": [
             {
-              "artifact_origin": "gocd",
-              "destination": "",
-              "is_source_a_file": false,
-              "job": "build.sh",
-              "pipeline": "grisp-software",
-              "run_if": "passed",
-              "source": "toolchain",
-              "stage": "build",
-              "type": "fetch"
-            },
-            {
               "arguments": [
                 ".gocd/install-env.sh"
               ],
@@ -105,7 +105,9 @@
             {
               "arguments": [
                 ".gocd/grisp-project.sh",
-                "--erlang-version=21.0-rc1"
+                "--erlang-version=20.2",
+                "--use-grisp-material",
+                "--toolchain-from-s3"
               ],
               "command": "/bin/bash",
               "run_if": "passed",

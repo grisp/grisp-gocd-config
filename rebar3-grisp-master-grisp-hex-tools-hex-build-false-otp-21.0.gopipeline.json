@@ -7,10 +7,21 @@
   "lock_behavior": "none",
   "materials": [
     {
-      "name": "grisp-software",
-      "pipeline": "grisp-software",
-      "stage": "build",
-      "type": "dependency"
+      "auto_update": true,
+      "branch": "master",
+      "destination": "rebar3_grisp/",
+      "filter": {
+        "ignore": [
+          
+        ],
+        "whitelist": [
+          
+        ]
+      },
+      "name": "rebar3_grisp",
+      "shallow_clone": false,
+      "type": "git",
+      "url": "https:github.com/grisp/rebar3_grisp.git"
     },
     {
       "auto_update": true,
@@ -30,7 +41,7 @@
       "url": "https://github.com/grisp/grisp-gocd.git"
     }
   ],
-  "name": "new-toolchain-otp-21.0-rc1",
+  "name": "rebar3-grisp-master-grisp-hex-tools-hex-build-false-otp-21.0",
   "parameters": [
     
   ],
@@ -53,11 +64,6 @@
       "jobs": [
         {
           "artifacts": [
-            {
-              "destination": "otp",
-              "source": "grisp_otp*.tar.gz",
-              "type": "build"
-            },
             {
               "destination": "grisp_release/",
               "source": "grisp_release*.tar.gz",
@@ -83,17 +89,6 @@
           ],
           "tasks": [
             {
-              "artifact_origin": "gocd",
-              "destination": "",
-              "is_source_a_file": false,
-              "job": "build.sh",
-              "pipeline": "grisp-software",
-              "run_if": "passed",
-              "source": "toolchain",
-              "stage": "build",
-              "type": "fetch"
-            },
-            {
               "arguments": [
                 ".gocd/install-env.sh"
               ],
@@ -105,7 +100,10 @@
             {
               "arguments": [
                 ".gocd/grisp-project.sh",
-                "--erlang-version=21.0-rc1"
+                "--erlang-version=21.0",
+                "--use-rebar3_grisp-material",
+                "--prebuilt-otp",
+                "--toolchain-from-s3"
               ],
               "command": "/bin/bash",
               "run_if": "passed",

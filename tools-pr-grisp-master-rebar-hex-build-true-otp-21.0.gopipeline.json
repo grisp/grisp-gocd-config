@@ -7,10 +7,21 @@
   "lock_behavior": "none",
   "materials": [
     {
-      "name": "grisp-software",
-      "pipeline": "grisp-software",
-      "stage": "build",
-      "type": "dependency"
+      "configuration": [
+        
+      ],
+      "destination": "grisp_tools/",
+      "filter": {
+        "ignore": [
+          
+        ],
+        "whitelist": [
+          
+        ]
+      },
+      "name": "grisp_tools",
+      "scm_id": "b0a55708-e100-4e52-8ebf-a21193f47bf1",
+      "type": "plugin"
     },
     {
       "auto_update": true,
@@ -30,7 +41,7 @@
       "url": "https://github.com/grisp/grisp-gocd.git"
     }
   ],
-  "name": "new-toolchain-otp-21.0-rc1",
+  "name": "tools-pr-grisp-master-rebar-hex-build-true-otp-21.0",
   "parameters": [
     
   ],
@@ -83,17 +94,6 @@
           ],
           "tasks": [
             {
-              "artifact_origin": "gocd",
-              "destination": "",
-              "is_source_a_file": false,
-              "job": "build.sh",
-              "pipeline": "grisp-software",
-              "run_if": "passed",
-              "source": "toolchain",
-              "stage": "build",
-              "type": "fetch"
-            },
-            {
               "arguments": [
                 ".gocd/install-env.sh"
               ],
@@ -104,8 +104,22 @@
             },
             {
               "arguments": [
+                "clone",
+                "https://github.com/grisp/grisp.git",
+                "grisp/"
+              ],
+              "command": "/usr/bin/git",
+              "run_if": "passed",
+              "timeout": -1.0,
+              "type": "exec"
+            },
+            {
+              "arguments": [
                 ".gocd/grisp-project.sh",
-                "--erlang-version=21.0-rc1"
+                "--erlang-version=21.0",
+                "--use-grisp_tools-material",
+                "--use-grisp-material",
+                "--toolchain-from-s3"
               ],
               "command": "/bin/bash",
               "run_if": "passed",

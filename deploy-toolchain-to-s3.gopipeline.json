@@ -1,115 +1,136 @@
 {
-    "group": "grisp",
-    "name": "deploy-toolchain-to-s3",
-    "label_template": "${COUNT}",
-    "lock_behavior": "none",
-    "environment_variables": [
-        {
-            "name": "AWS_ACCESS_KEY_ID",
-            "encrypted_value": "AES:NDatjHrPSJE+7sUeeiG2IA\u003d\u003d:rxnqUE4Ci3lsxIGQP1WrJGkJdgp9ES0IuSe6SpIVefc\u003d"
-        },
-        {
-            "name": "AWS_SECRET_ACCESS_KEY",
-            "encrypted_value": "AES:tvRqF3tKo15dmHrf0NWYkA\u003d\u003d:jBn/N0dXbD7oB7vR9W+D/yIL5rtmndswyPWekmOwP6SI2q5GK/kRXKXjNXoFwm0l"
-        }
-    ],
-    "parameters": [],
-    "materials": [
-        {
-            "pipeline": "grisp-software",
-            "stage": "build",
-            "name": "toolchain",
-            "type": "dependency"
-        },
+  "environment_variables": [
+    {
+      "encrypted_value": "AES:NDatjHrPSJE+7sUeeiG2IA==:rxnqUE4Ci3lsxIGQP1WrJGkJdgp9ES0IuSe6SpIVefc=",
+      "name": "AWS_ACCESS_KEY_ID"
+    },
+    {
+      "encrypted_value": "AES:tvRqF3tKo15dmHrf0NWYkA==:jBn/N0dXbD7oB7vR9W+D/yIL5rtmndswyPWekmOwP6SI2q5GK/kRXKXjNXoFwm0l",
+      "name": "AWS_SECRET_ACCESS_KEY"
+    }
+  ],
+  "group": "grisp",
+  "label_template": "${COUNT}",
+  "lock_behavior": "none",
+  "materials": [
+    {
+      "name": "toolchain",
+      "pipeline": "grisp-software",
+      "stage": "build",
+      "type": "dependency"
+    },
+    {
+      "name": "new-toolchain-otp-22.0",
+      "pipeline": "new-toolchain-otp-22.0",
+      "stage": "build",
+      "type": "dependency"
+    },
+    {
+      "name": "new-toolchain-otp-21.0",
+      "pipeline": "new-toolchain-otp-21.0",
+      "stage": "build",
+      "type": "dependency"
+    },
+    {
+      "name": "new-toolchain-otp-21.0-rc1",
+      "pipeline": "new-toolchain-otp-21.0-rc1",
+      "stage": "build",
+      "type": "dependency"
+    },
+    {
+      "name": "new-toolchain-otp-20.2",
+      "pipeline": "new-toolchain-otp-20.2",
+      "stage": "build",
+      "type": "dependency"
+    },
+    {
+      "auto_update": true,
+      "branch": "master",
+      "destination": ".gocd",
+      "filter": {
+        "ignore": [
+          
+        ],
+        "whitelist": [
+          
+        ]
+      },
+      "name": "grisp-gocd",
+      "shallow_clone": false,
+      "type": "git",
+      "url": "https://github.com/grisp/grisp-gocd.git"
+    }
+  ],
+  "name": "deploy-toolchain-to-s3",
+  "parameters": [
+    
+  ],
+  "stages": [
+    {
+      "approval": {
+        "roles": [
+          
+        ],
+        "type": "success",
+        "users": [
+          
+        ]
+      },
+      "clean_working_directory": true,
+      "environment_variables": [
         
+      ],
+      "fetch_materials": true,
+      "jobs": [
         {
-            "pipeline": "new-toolchain-otp-20.2",
-            "stage": "build",
-            "name": "new-toolchain-otp-20.2",
-            "type": "dependency"
-        },
-        
-        {
-            "pipeline": "new-toolchain-otp-21.0-rc1",
-            "stage": "build",
-            "name": "new-toolchain-otp-21.0-rc1",
-            "type": "dependency"
-        },
-        
-        {
-            "pipeline": "new-toolchain-otp-21.0",
-            "stage": "build",
-            "name": "new-toolchain-otp-21.0",
-            "type": "dependency"
-        },
-        
-
-        {
-            "url": "https://github.com/grisp/grisp-gocd.git",
-            "branch": "master",
-            "shallow_clone": false,
-            "filter": {
-                "ignore": [],
-                "whitelist": []
+          "artifacts": [
+            {
+              "destination": "",
+              "source": "deploy_log",
+              "type": "build"
+            }
+          ],
+          "environment_variables": [
+            
+          ],
+          "name": "fetch_toolchain",
+          "properties": [
+            
+          ],
+          "resources": [
+            
+          ],
+          "run_instance_count": "0",
+          "tabs": [
+            
+          ],
+          "tasks": [
+            {
+              "artifact_origin": "gocd",
+              "destination": "",
+              "is_source_a_file": false,
+              "job": "build.sh",
+              "pipeline": "grisp-software",
+              "run_if": "passed",
+              "source": "toolchain",
+              "stage": "build",
+              "type": "fetch"
             },
-            "destination": ".gocd",
-            "auto_update": true,
-            "name": "grisp-gocd",
-            "type": "git"
+            {
+              "arguments": [
+                ".gocd/deploy-toolchain.sh"
+              ],
+              "command": "/bin/bash",
+              "run_if": "passed",
+              "timeout": -1.0,
+              "type": "exec"
+            }
+          ],
+          "timeout": 0.0
         }
-    ],
-    "stages": [
-        {
-            "name": "deploy",
-            "fetch_materials": true,
-            "never_cleanup_artifacts": false,
-            "clean_working_directory": true,
-            "approval": {
-                "type": "success",
-                "users": [],
-                "roles": []
-            },
-            "environment_variables": [],
-            "jobs": [
-                {
-                    "name": "fetch_toolchain",
-                    "environment_variables": [],
-                    "tabs": [],
-                    "resources": [],
-                    "artifacts": [
-                        {
-                            "source": "deploy_log",
-                            "destination": "",
-                            "type": "build"
-                        }
-                    ],
-                    "properties": [],
-                    "run_instance_count": "0",
-                    "timeout": 0.0,
-                    "tasks": [
-                        {
-                            "source": "toolchain",
-                            "is_source_a_file": false,
-                            "destination": "",
-                            "pipeline": "grisp-software",
-                            "stage": "build",
-                            "job": "build.sh",
-                            "artifact_origin": "gocd",
-                            "run_if": "passed",
-                            "type": "fetch"
-                        },
-                        {
-                            "command": "/bin/bash",
-                            "timeout": -1.0,
-                            "arguments": [
-                                ".gocd/deploy-toolchain.sh"
-                            ],
-                            "run_if": "passed",
-                            "type": "exec"
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
+      ],
+      "name": "deploy",
+      "never_cleanup_artifacts": false
+    }
+  ]
 }
