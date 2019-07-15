@@ -9,7 +9,7 @@
       "name": "AWS_SECRET_ACCESS_KEY"
     }
   ],
-  "group": "grisp",
+  "group": "deploy",
   "label_template": "${COUNT}",
   "lock_behavior": "none",
   "materials": [
@@ -20,14 +20,14 @@
       "type": "dependency"
     },
     {
-      "name": "new-toolchain-otp-22.0",
-      "pipeline": "new-toolchain-otp-22.0",
+      "name": "new-toolchain-otp-21.0",
+      "pipeline": "new-toolchain-otp-21.0",
       "stage": "build",
       "type": "dependency"
     },
     {
-      "name": "new-toolchain-otp-21.0",
-      "pipeline": "new-toolchain-otp-21.0",
+      "name": "new-toolchain-otp-22.0",
+      "pipeline": "new-toolchain-otp-22.0",
       "stage": "build",
       "type": "dependency"
     },

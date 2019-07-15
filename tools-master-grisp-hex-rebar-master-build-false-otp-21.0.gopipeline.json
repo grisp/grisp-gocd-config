@@ -2,7 +2,7 @@
   "environment_variables": [
     
   ],
-  "group": "grisp",
+  "group": "grisp_tools",
   "label_template": "${COUNT}",
   "lock_behavior": "none",
   "materials": [
@@ -22,6 +22,12 @@
       "shallow_clone": false,
       "type": "git",
       "url": "https://github.com/grisp/grisp_tools.git"
+    },
+    {
+      "name": "tools-master-grisp-hex-rebar-master-build-true-otp-21.0",
+      "pipeline": "tools-master-grisp-hex-rebar-master-build-true-otp-21.0",
+      "stage": "build",
+      "type": "dependency"
     },
     {
       "auto_update": true,

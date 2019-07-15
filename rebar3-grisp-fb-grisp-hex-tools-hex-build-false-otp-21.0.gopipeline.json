@@ -2,7 +2,7 @@
   "environment_variables": [
     
   ],
-  "group": "grisp",
+  "group": "rebar3_grisp",
   "label_template": "${COUNT}",
   "lock_behavior": "none",
   "materials": [
@@ -22,6 +22,12 @@
       "name": "rebar3_grisp",
       "scm_id": "as1123-e100-4e52-8ebf-a21193f47bf1",
       "type": "plugin"
+    },
+    {
+      "name": "rebar3-grisp-fb-grisp-hex-tools-hex-build-true-otp-21.0",
+      "pipeline": "rebar3-grisp-fb-grisp-hex-tools-hex-build-true-otp-21.0",
+      "stage": "build",
+      "type": "dependency"
     },
     {
       "auto_update": true,

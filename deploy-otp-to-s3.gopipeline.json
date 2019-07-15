@@ -9,10 +9,16 @@
       "name": "AWS_SECRET_ACCESS_KEY"
     }
   ],
-  "group": "grisp",
+  "group": "deploy",
   "label_template": "${COUNT}",
   "lock_behavior": "none",
   "materials": [
+    {
+      "name": "grisp-master-otp-21.0-rc1",
+      "pipeline": "grisp-master-otp-21.0-rc1",
+      "stage": "build",
+      "type": "dependency"
+    },
     {
       "name": "grisp-master-otp-22.0",
       "pipeline": "grisp-master-otp-22.0",
@@ -22,12 +28,6 @@
     {
       "name": "grisp-master-otp-21.0",
       "pipeline": "grisp-master-otp-21.0",
-      "stage": "build",
-      "type": "dependency"
-    },
-    {
-      "name": "grisp-master-otp-21.0-rc1",
-      "pipeline": "grisp-master-otp-21.0-rc1",
       "stage": "build",
       "type": "dependency"
     },
@@ -104,6 +104,17 @@
               "destination": "",
               "is_source_a_file": false,
               "job": "build_grisp_project",
+              "pipeline": "grisp-master-otp-21.0-rc1",
+              "run_if": "passed",
+              "source": "otp",
+              "stage": "build",
+              "type": "fetch"
+            },
+            {
+              "artifact_origin": "gocd",
+              "destination": "",
+              "is_source_a_file": false,
+              "job": "build_grisp_project",
               "pipeline": "grisp-master-otp-22.0",
               "run_if": "passed",
               "source": "otp",
@@ -116,17 +127,6 @@
               "is_source_a_file": false,
               "job": "build_grisp_project",
               "pipeline": "grisp-master-otp-21.0",
-              "run_if": "passed",
-              "source": "otp",
-              "stage": "build",
-              "type": "fetch"
-            },
-            {
-              "artifact_origin": "gocd",
-              "destination": "",
-              "is_source_a_file": false,
-              "job": "build_grisp_project",
-              "pipeline": "grisp-master-otp-21.0-rc1",
               "run_if": "passed",
               "source": "otp",
               "stage": "build",
