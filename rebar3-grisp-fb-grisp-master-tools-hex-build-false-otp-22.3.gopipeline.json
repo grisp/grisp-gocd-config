@@ -1,0 +1,139 @@
+{
+  "environment_variables": [
+    
+  ],
+  "group": "rebar3_grisp",
+  "label_template": "${COUNT}",
+  "lock_behavior": "none",
+  "materials": [
+    {
+      "configuration": [
+        
+      ],
+      "destination": "rebar3_grisp/",
+      "filter": {
+        "ignore": [
+          
+        ],
+        "whitelist": [
+          
+        ]
+      },
+      "name": "rebar3_grisp",
+      "scm_id": "as1123-e100-4e52-8ebf-a21193f47bf1",
+      "type": "plugin"
+    },
+    {
+      "name": "rebar3-grisp-fb-grisp-master-tools-hex-build-true-otp-22.3",
+      "pipeline": "rebar3-grisp-fb-grisp-master-tools-hex-build-true-otp-22.3",
+      "stage": "build",
+      "type": "dependency"
+    },
+    {
+      "auto_update": true,
+      "branch": "master",
+      "destination": ".gocd",
+      "filter": {
+        "ignore": [
+          
+        ],
+        "whitelist": [
+          
+        ]
+      },
+      "name": "gocd",
+      "shallow_clone": false,
+      "type": "git",
+      "url": "https://github.com/grisp/grisp-gocd.git"
+    }
+  ],
+  "name": "rebar3-grisp-fb-grisp-master-tools-hex-build-false-otp-22.3",
+  "parameters": [
+    
+  ],
+  "stages": [
+    {
+      "approval": {
+        "roles": [
+          
+        ],
+        "type": "success",
+        "users": [
+          
+        ]
+      },
+      "clean_working_directory": true,
+      "environment_variables": [
+        
+      ],
+      "fetch_materials": true,
+      "jobs": [
+        {
+          "artifacts": [
+            {
+              "destination": "grisp_release/",
+              "source": "grisp_release*.tar.gz",
+              "type": "build"
+            }
+          ],
+          "environment_variables": [
+            {
+              "encrypted_value": "AES:jrW5vV/Il7aaMequSv5V7Q==:Nb+eeokNuRaX50tM+YRyedDxnhSME/16YO/0uSs8GjjQ7uqZ9W0ZBUTV0gYFMg0k",
+              "name": "GO_API_TOKEN"
+            }
+          ],
+          "name": "build_grisp_project",
+          "properties": [
+            
+          ],
+          "resources": [
+            
+          ],
+          "run_instance_count": "0",
+          "tabs": [
+            
+          ],
+          "tasks": [
+            {
+              "arguments": [
+                ".gocd/install-env.sh"
+              ],
+              "command": "/bin/bash",
+              "run_if": "passed",
+              "timeout": -1.0,
+              "type": "exec"
+            },
+            {
+              "arguments": [
+                "clone",
+                "https://github.com/grisp/grisp.git",
+                "grisp/"
+              ],
+              "command": "/usr/bin/git",
+              "run_if": "passed",
+              "timeout": -1.0,
+              "type": "exec"
+            },
+            {
+              "arguments": [
+                ".gocd/grisp-project.sh",
+                "--erlang-version=22.3",
+                "--use-rebar3_grisp-material",
+                "--use-grisp-material",
+                "--prebuilt-otp",
+                "--toolchain-from-s3"
+              ],
+              "command": "/bin/bash",
+              "run_if": "passed",
+              "timeout": -1.0,
+              "type": "exec"
+            }
+          ],
+          "timeout": 0.0
+        }
+      ],
+      "name": "build",
+      "never_cleanup_artifacts": false
+    }
+  ]
+}

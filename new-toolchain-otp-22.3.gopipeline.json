@@ -1,51 +1,14 @@
 {
   "environment_variables": [
-    {
-      "encrypted_value": "AES:NDatjHrPSJE+7sUeeiG2IA==:rxnqUE4Ci3lsxIGQP1WrJGkJdgp9ES0IuSe6SpIVefc=",
-      "name": "AWS_ACCESS_KEY_ID"
-    },
-    {
-      "encrypted_value": "AES:tvRqF3tKo15dmHrf0NWYkA==:jBn/N0dXbD7oB7vR9W+D/yIL5rtmndswyPWekmOwP6SI2q5GK/kRXKXjNXoFwm0l",
-      "name": "AWS_SECRET_ACCESS_KEY"
-    }
+    
   ],
-  "group": "deploy",
+  "group": "new_toolchain",
   "label_template": "${COUNT}",
   "lock_behavior": "none",
   "materials": [
     {
-      "name": "toolchain",
+      "name": "grisp-software",
       "pipeline": "grisp-software",
-      "stage": "build",
-      "type": "dependency"
-    },
-    {
-      "name": "new-toolchain-otp-22.0",
-      "pipeline": "new-toolchain-otp-22.0",
-      "stage": "build",
-      "type": "dependency"
-    },
-    {
-      "name": "new-toolchain-otp-21.0",
-      "pipeline": "new-toolchain-otp-21.0",
-      "stage": "build",
-      "type": "dependency"
-    },
-    {
-      "name": "new-toolchain-otp-21.0-rc1",
-      "pipeline": "new-toolchain-otp-21.0-rc1",
-      "stage": "build",
-      "type": "dependency"
-    },
-    {
-      "name": "new-toolchain-otp-20.2",
-      "pipeline": "new-toolchain-otp-20.2",
-      "stage": "build",
-      "type": "dependency"
-    },
-    {
-      "name": "new-toolchain-otp-22.3",
-      "pipeline": "new-toolchain-otp-22.3",
       "stage": "build",
       "type": "dependency"
     },
@@ -61,13 +24,13 @@
           
         ]
       },
-      "name": "grisp-gocd",
+      "name": "gocd",
       "shallow_clone": false,
       "type": "git",
       "url": "https://github.com/grisp/grisp-gocd.git"
     }
   ],
-  "name": "deploy-toolchain-to-s3",
+  "name": "new-toolchain-otp-22.3",
   "parameters": [
     
   ],
@@ -91,15 +54,23 @@
         {
           "artifacts": [
             {
-              "destination": "",
-              "source": "deploy_log",
+              "destination": "otp",
+              "source": "grisp_otp*.tar.gz",
+              "type": "build"
+            },
+            {
+              "destination": "grisp_release/",
+              "source": "grisp_release*.tar.gz",
               "type": "build"
             }
           ],
           "environment_variables": [
-            
+            {
+              "encrypted_value": "AES:jrW5vV/Il7aaMequSv5V7Q==:Nb+eeokNuRaX50tM+YRyedDxnhSME/16YO/0uSs8GjjQ7uqZ9W0ZBUTV0gYFMg0k",
+              "name": "GO_API_TOKEN"
+            }
           ],
-          "name": "fetch_toolchain",
+          "name": "build_grisp_project",
           "properties": [
             
           ],
@@ -124,7 +95,17 @@
             },
             {
               "arguments": [
-                ".gocd/deploy-toolchain.sh"
+                ".gocd/install-env.sh"
+              ],
+              "command": "/bin/bash",
+              "run_if": "passed",
+              "timeout": -1.0,
+              "type": "exec"
+            },
+            {
+              "arguments": [
+                ".gocd/grisp-project.sh",
+                "--erlang-version=22.3"
               ],
               "command": "/bin/bash",
               "run_if": "passed",
@@ -135,7 +116,7 @@
           "timeout": 0.0
         }
       ],
-      "name": "deploy",
+      "name": "build",
       "never_cleanup_artifacts": false
     }
   ]
